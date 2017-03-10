@@ -1,0 +1,47 @@
+#inputTable{
+	float:left;
+	width:75%;
+	padding:20px;
+	margin-top:10px;
+	border:3px solid black;
+	border-spacing:2px;
+}
+
+#resultTable{
+	float:left;
+	width:75%;
+	padding:20px;
+	margin-top:10px;
+	border:3px solid black;
+	border-spacing:2px;
+}
+
+label{
+    display: inline-block;
+    float: left;
+    clear: left;
+    width: 100px;
+    text-align: right;
+}
+
+input#1 {
+	display: inline-block;
+	float: left;
+}
+
+table.db-table 		{ 
+	border-right:1px solid #ccc; 
+	border-bottom:1px solid #ccc; 
+}
+
+table.db-table th	{ 
+	background:#eee; padding:5px; 
+	border-left:1px solid #ccc; 
+	border-top:1px solid #ccc; 
+}
+
+table.db-table td	{ 
+	padding:5px; 
+	border-left:1px solid #ccc; 
+	border-top:1px solid #ccc; 
+}

@@ -1,0 +1,7 @@
+Coverage Report: 
+ALL: classes: 100% (2/2); branches:  79% (60/76); lines:  87% (118/136);
+PKG+: edu.gatech.seclass.replace classes: 100% (2/2); branches:  79% (60/76); lines:  87% (118/136);
+CLS+: Main  branches:  71% (37/52); lines:  84% (59/70);
+
+CLS+: Replace  branches:  96% (23/24); lines:  89% (59/66);
+

@@ -1,0 +1,45 @@
+.circle {
+  background: white;
+  border: 2px solid black;
+  border-radius: 50%;
+  color: black;
+  font-size: 10px;
+  text-align: center;
+  width: 15px;
+  height: 15px;
+  z-index: 100;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.circle.visited,
+.circle.error {
+  border: none;
+  color: white;
+}
+
+.circle.visited {
+  background: black;
+}
+
+.circle.error {
+  background: red;
+}
+
+.connector {
+  z-index: -1;
+}
+
+
+.line {
+  transform-origin: 0% 0%;
+  background: black;
+  height: 2px;
+}
+
+
+.back-line {
+  transform-origin: 0% 50%;
+  border: solid 2px black;
+  border-color: green transparent transparent transparent;
+}

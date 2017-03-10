@@ -1,0 +1,47 @@
+CS362 Final project - Part a
+Jeremy Fischman
+Huy Pham
+Xisheng Wang
+
+1) Explain testIsValid Function of UrlValidator test code. 
+
+a.	The function calls the  UrlValidator constructor to initiate an instance of urlVal.
+b. 	It then uses the assertTrue method to test two correct urls to make sure UrlValidator up and running.
+c.	A url is built in the for loop within the do-while loop.  During build up of the url, its validity is saved in a Boolean variable called ‘expected’.
+d.	The method isValid() is called to test if the url is valid. The return value from isValid() is saved in Boolean variable called ‘result’. If it is valid, the url will be printed out.
+e.	assertEquals() is called to compare whether ‘expected’ matches ‘result’, which would indicate a passed test.  
+f.	In the building of url,  do-while iterates all the possible combinations of five parts of a url to be used for testing. 
+
+In summary, the testIsValid function generate a url with known validity status, either valid (true) or invalid (false). The isValid() method from UrlValidator class is called to test this url. It’s result is compared with the original status to decide if the UrlValidator is doing the right validation. 
+ 
+2) How many total number of urls it is testing. 
+Five parts are used to make each url: testUrlScheme, testUrlAuthority, testUrlPort, testPath, testUrlQuery with a possible 9, 19, 7, 10, and  3 choices respectively. Therefore, the total number of urls tested is: 9*19*7*10*3 = 35910.
+
+3) Explain how it is building all the urls. 
+Urls are built from five parts: a Scheme, Authority, Port, Path,  and Query. Each part has multiple choices for testing: Scheme - 9, Authority - 19, Port - 17, Path - 10, and Query - 3. Each individual parts is saved in an instance of an object called  ‘ResultPair’ which has two fields: an item and its validity. The item is the string of url part, such as http://. The validity is a boolean indicating that this part of the url is valid. All of the ResultPairs for the same part of the url are stored in an array.  For example the array of ResultPairs called ‘testUrlScheme’ stores all 9 ResultPairs of the 9 urlSchemes. All five ResultPair arrays are saved in the Object array: Object[] testUrlParts.  testPartIndex is an array that holds the 5 indices of the current ResultPairs in testUrlParts being tested.   For example, if testPartIndex = {1, 1, 1, 1, 0} then the url is comprised of the 2nd scheme, the second Authority, the second port, the second Path, and the second Query.  It’s validity would be the logical AND of the validity fields of those 5 ResultPairs. 
+
+To build a url, the do-while loop iterates all the possible combinations of different parts of the url to make all possible urls. Each individual url is built in the for loop. The statement, expected &= part[index].valid, makes sure that if any part of url is invalid, ‘expected’ will be false.  The condition statement for the do-while loop, incrementTestPartsIndex(testPartsIndex, testObjects), increments urls part from the Query. The resulting urls  will sequence like the digits in a car odometer: {0,0,0,0,1}, {0,0,0,0,2},{0,0,0,0,3},{0,0,0,1,0}, {0,0,0,1,1}, {0,0,0,1,2}, {0,0,0,2,0}, {0,0,0,2,1}, {0,0,0,2,2},………
+ 
+4) Give an example of valid url being tested and an invalid url being tested by testIsValid() method. 
+Testing  valid url:  http://www.google.com:80/test1?action=view
+In for loop: 
+1st iteration:  1)testPartsIndexIndex = 0.  2)first part of url:  testObjects[0] is assigned to temperate holder ResultPair part.  3)index to access the individual url is assigned based on testPartsIndex {0, 0, 0, 0, 0}. Here index = 0. 4)part[0].item =” http:// “ is appended to the string. expected &= part[index].valid, return true as part[0].valid = “true”. The testBuffer is http://
+2nd iteration: 1)testPartsIndexIndex = 1.  2)second part of url:  testObjects[1] is assigned to temperate holder ResultPair part.  3)index to access the individual url is assigned based on testPartsIndex {0, 0, 0, 0, 0}. Here index = 0. 4)part[0].item =” "www.google.com “ is appended to the string. expected &= part[index].valid, return true as part[0].valid = “true”.  The testBuffer is http://www.google.com
+3rd iteration: 1)testPartsIndexIndex = 2.  2)third part of url:  testObjects[2] is assigned to temperate holder ResultPair part.  3)index to access the individual url is assigned based on testPartsIndex {0, 0, 0, 0, 0}. Here index = 0. 4)part[0].item =” :80 “ is appended to the string. expected &= part[index].valid, return true as part[0].valid = “true”.  The testBuffer is http://www.google.com:80
+4th  iteration: 1)testPartsIndexIndex = 3.  2)fourth part of url:  testObjects[3] is assigned to temperate holder ResultPair part.  3)index to access the individual url is assigned based on testPartsIndex {0, 0, 0, 0, 0}. Here index = 0. 4)part[0].item =” /test1 “ is appended to the string. expected &= part[index].valid, return true as part[0].valid = “true”.  The testBuffer is http://www.google.com:80/test1
+5th  iteration: 1)testPartsIndexIndex = 4.  2)fifth part of url:  testObjects[4] is assigned to temperate holder ResultPair part.  3)index to access the individual url is assigned based on testPartsIndex {0, 0, 0, 0, 0}. Here index = 0. 4)part[0].item =” ?action=view “ is appended to the string. expected &= part[index].valid, return true as part[0].valid = “true”.  The testBuffer is http://www.google.com:80/test1?action=view
+isValid() is called to test the above string, result is returned as true. expected and result are equal. The url is valid and tested.
+
+Testing  invalid url:  http:// www.google.com:80/..//file?action=view
+In for loop: 
+1st iteration:  1)testPartsIndexIndex = 0.  2)first part of url:  testObjects[0] is assigned to temperate holder ResultPair part.  3)index to access the individual url is assigned based on testPartsIndex {0, 0, 0, 8, 0}. Here index = 0. 4)part[0].item =” http:// “ is appended to the string. expected &= part[index].valid, return true as part[0].valid = “true”. The testBuffer is http://
+2nd iteration: 1)testPartsIndexIndex = 1.  2)second part of url:  testObjects[1] is assigned to temperate holder ResultPair part.  3)index to access the individual url is assigned based on testPartsIndex {0, 0, 0, 8, 0}. Here index = 0. 4)part[1].item =” "www.google.com “ is appended to the string. expected &= part[index].valid, return true as part[1].valid = “true”.  The testBuffer is http://www.google.com 
+3rd iteration: 1)testPartsIndexIndex = 2.  2)third part of url:  testObjects[2] is assigned to temperate holder ResultPair part.  3)index to access the individual url is assigned based on testPartsIndex {0, 0, 0, 8, 0}. Here index = 0. 4)part[0].item =” :80 “ is appended to the string. expected &= part[index].valid, return true as part[0].valid = “true”.  The testBuffer is http://www.google.com:80 
+4th  iteration: 1)testPartsIndexIndex = 3.  2)fourth part of url:  testObjects[3] is assigned to temperate holder ResultPair part.  3)index to access the individual url is assigned based on testPartsIndex {0, 0, 0, 8, 0}. Here index = 0. 4)part[8].item =” /..//file “ is appended to the string. expected &= part[index].valid, return false as part[8].valid = “false”.  The testBuffer is http://www.google.com:80 /..//file 
+5th  iteration: 1)testPartsIndexIndex = 4.  2)fifth part of url:  testObjects[4] is assigned to temperate holder ResultPair part.  3)index to access the individual url is assigned based on testPartsIndex {0, 0, 0, 8, 0}. Here index = 0. 4)part[0].item =” ?action=view “ is appended to the string. expected &= part[index].valid, return false as original expected value is false.  The testBuffer is http://www.google.com:80 /..//file?action=view
+isValid() is called to test the above string, result is returned as false.  expected and result are equal. The url is invalid and tested.
+
+5) Do you think that a real world test (URL Validator's testIsValid() test in this case) is very different than the unit tests and card tests that we wrote (in terms of concepts & complexity)? Explain in few lines. Submit a file called ProjectPartA.txt with your writeup. You can submit the file under the folder URLValidator within on ONID directory. (How to setup this folder will be explained soon.)
+
+We think the concepts are the same. Basically, in both cases a test case is generated in the tester function and then the target function is called. The expected result of the test case is computed or provided, and then checked against the result of the target function to ensure they match. The only difference is that testIsValid is much more lengthy than the unit tests we wrote.  Because URL Validator is testing a lots of different forms of urls, the testing function needs to test all these different possibilities.   
+

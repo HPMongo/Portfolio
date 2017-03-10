@@ -1,0 +1,199 @@
+html {
+  height: 100%;
+}
+
+body {
+  font-family: Arial;
+  min-height: 100%;
+  position: relative;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Ubuntu Mono';
+}
+
+/* logo f700ff*/
+.logo {
+  margin-top: 0.2em;
+  width: 150px;
+}
+
+#upper h2 {
+  font-size: 1.7em;
+  margin-top: 0;
+}
+
+#upper form {
+  padding: 0;
+}
+
+form .form-group:last-child {
+  margin-bottom: 0;
+}
+
+#crawler-input .help-block {
+  margin-bottom: 0;
+}
+
+#crawler-input input[type="number"] {
+  max-width: 6em;
+}
+
+.visible-xs-block {
+  margin-top: 2em;
+}
+
+#model {
+  margin-bottom: 1em;
+}
+
+#model .vertex:hover + .label,
+#model .label:hover {
+  /* Hide the vertex label on hover so it doesn't get in the way of triggering
+     the tooltip */
+  display: none;
+}
+
+#model-start,
+#model-end {
+  font-weight: bold;
+}
+
+#model-start {
+  margin-bottom: 20px;
+}
+
+.tooltip-inner {
+  word-break: break-all;
+}
+
+.previous-query {
+  color: #f700ff;
+  cursor: pointer;
+  padding-left: 10px;
+}
+
+#menu-bar {
+  background-color: rgba(254, 254, 254, 1);
+  background-color
+  border: 1px solid #ccc;
+  border-bottom: none;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  padding: 0.5em;
+  position: absolute;
+  bottom: 0;
+  left: 5%;
+  right: 5%;
+  moz-box-shadow: 0px 0px 6px #ddd;
+  -webkit-box-shadow: 0px 0px 6px #ddd;
+  box-shadow: 0px 0px 6px #ddd;
+}
+
+#menu-bar h3 {
+  margin: 0;
+  padding: 0;
+}
+
+#menu-bar h3 a {
+  color: #000;
+}
+
+#menu-bar h3 .glyphicon-cog,
+#stop-btn .glyphicon-remove-circle {
+  margin-right: 0.25em;
+}
+
+#menu-bar h3 .glyphicon-cog {
+  font-size: 18px;
+}
+
+#stop-btn .glyphicon-remove-circle {
+  margin-bottom: 5px;
+  vertical-align: middle;
+}
+
+#stop-btn {
+  font-size: 14px;
+  position: absolute;
+  right: 1.15em;
+}
+
+/* Forms */
+.form-group {
+  margin-bottom: 5px;
+}
+
+
+
+
+
+
+/* Bootstrap Style Changes */
+.btn {
+  border-radius: 0px;
+}
+
+.btn-primary {
+  background-color: #000;
+  border-color: #140014;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+  background-color: #f700ff;
+  border-color: #4f0052;
+}
+
+.form-control {
+  border-radius: 0px;
+}
+
+.form-control:focus {
+  border-color: #fa70ff;
+  -webkit-box-shadow: inset 0 1px 1px rgba(250,112,155,.1),0 0 8px rgba(250,112,155,.6);
+  box-shadow: inset 0 1px 1px rgba(250,112,155,.1),0 0 8px rgba(250,112,155,.6);
+}
+
+.has-error .checkbox, .has-error .checkbox-inline, .has-error .control-label, .has-error .form-control-feedback, .has-error .help-block, .has-error .radio, .has-error .radio-inline, .has-error.checkbox label, .has-error.checkbox-inline label, .has-error.radio label, .has-error.radio-inline label {
+  color: #FF0008;
+}
+.has-error .form-control, .has-error .form-control:focus {
+  border-color: #FF0008;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+}
+
+.btn-danger {
+  background-color: #FF0008;
+}
+
+.btn-danger:hover {
+  background-color: #c00;
+}
+
+/* Extra small devices (phones, less than 768px) */
+/* No media query since this is the default in Bootstrap */
+
+/* Extrasmall devices (tablets, 768px and below) */
+@media (max-width: 767px) {
+  img.logo {
+    width: 75px;
+  }
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991px) {
+  img.logo {
+    width: 100px;
+  }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199px) {
+
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+
+}

@@ -1,0 +1,74 @@
+extends layout
+
+block variables
+  - var title = 'Crawler';
+
+block css
+  link(rel='stylesheet', href='css/shape.css')
+  link(href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css')
+
+block content
+  div.row
+    div.col-md-12
+      img.logo.img-responsive(src="img/logo_v2.png")
+
+  section#model.col-md-12
+
+block footer
+  div#menu-bar
+    div.row
+      div.col-md-12
+        h3.text-center
+          a(role="button" data-toggle="collapse" data-target="#upper" aria-expanded="false" aria-controls="upper")
+            span.glyphicon.glyphicon-cog
+            | Config 
+          button#stop-btn.btn.btn-danger.btn-xs.hidden
+            span.glyphicon.glyphicon-remove-circle(aria-hidden='true') 
+            | Stop
+    section#upper.clearfix.collapse.in
+      section.col-sm-8
+        h4 Session Parameters
+        form#crawler-input.form-horizontal(action="crawl" method="POST")
+          div#form-group-url.form-group
+            label.col-sm-2.control-label(for="input-url") Starting URL
+            div.col-sm-10
+              input#input-url.form-control(name="url" type="url" placeholder="http://www.example.com/page/")
+
+          div#form-group-type.form-group
+            label.col-sm-2.control-label Search Type
+            div.col-sm-10
+              label.radio-inline
+                input(name="type" type="radio" value="dfs" checked)
+                | Depth-first
+              label.radio-inline
+                input(name="type" type="radio" value="bfs")
+                | Breadth-first
+
+          div#form-group-limit.form-group
+            label.col-sm-2.control-label(for="input-limit") Limit
+            div.col-sm-10
+              input#input-limit.form-control(name="limit" type="number" min="1" max="99" value="1")
+
+          div#form-group-keyword.form-group
+            label.col-sm-2.control-label(for="input-keyword") Keyword
+            div.col-sm-10
+              input#input-keyword.form-control(name="keyword" type="text")
+
+          div.form-group
+            label.col-sm-2
+            div.col-sm-10
+              button.btn.btn-primary(name="submit" type="submit") Start
+              button.btn.btn-default.pull-right(type="reset") Reset
+
+      div.clearfix.visible-xs-block
+      section#previous-queries.col-sm-4
+        h4 Previous Crawls
+        ul.list-unstyled.previous-queries
+
+block footer_scripts
+  script(src='js/jquery.validate.min.js')
+  script(src='js/raphael.min.js')
+  script(src='js/springy.min.js')
+  script(src='js/graph.js')
+  script(src='js/localStore.js')
+  script(src='js/index.js')

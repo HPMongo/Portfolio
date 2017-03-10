@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="scripts.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Welcome to Rate My Songs</h2>
+        <h4>Please log in to continue</h4>
+        <form action="/" id="searchForm">
+            <input type="text" id="user" name="user" placeholder="Username">
+            <input type="password" id="pass" name="pass" placeholder="Password"><br>
+            <input type="submit" value="Login">
+        </form>
+        <form action="register.html">
+            <input type="submit" value="Register new account">
+        </form>
+    </div>
+    <script>
+        // Attach a submit handler to the form
+        $( "#searchForm" ).submit(function( event ) {
+
+            // Stop form from submitting normally
+            event.preventDefault();
+
+            // Get some values from elements on the page:
+            var $form = $( this ),
+                    inUser = $form.find( "input[id='user']" ).val(),
+                    inPW = $form.find("input[id='pass']").val(),
+                    url = 'http://ec2-52-39-193-144.us-west-2.compute.amazonaws.com:3000/validateAccount';
+            // Send the data using post
+            var posting = $.post( url, { user: inUser , userPW: inPW} );
+
+            // Put the results in a div
+            posting.done(function( data ) {
+                var status = data.status;
+                var message = data.message;
+                var outUser = data.results;
+                $( "#result" ).empty().append( message );
+                if(status === 200) {
+                    createCookie('apiuser',outUser,1);
+                    var nextpage = "landing.html";
+                    $(location).attr('href',nextpage);
+                }
+            });
+        });
+    </script>
+    <div class="container">
+        <pre id="result">
+            <!-- To be populated dynamically. -->
+        </pre>
+    </div>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_list_item"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="edu.gatech.seclass.glm.ListItemActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_height="wrap_content"
+            android:id="@+id/selectItemTextLayout"
+            android:layout_weight="0">
+
+            <TextView
+                android:text="Select Item to Add to List"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView4"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:layout_weight="0" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/selectItemTextLayout"
+            android:id="@+id/itemTypeSpinnerLayout">
+
+
+            <TextView
+                android:text="Item Type:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewItemType"
+                android:textAlignment="viewStart"
+                android:textSize="20sp"
+                android:layout_weight="0" />
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/itemTypeSpinner" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/itemTypeSpinnerLayout"
+            android:layout_alignParentStart="true"
+            android:layout_width="match_parent"
+            android:id="@+id/SearchLayout">
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:id="@+id/searchForItemByNameEditTExt"
+                android:hint="Search for Item by Name"
+                android:layout_weight="1" />
+
+            <Button
+                android:text="Search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/searchButton"
+                android:layout_weight="0"
+                android:onClick="onClickSearchButton" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:id="@+id/itemListViewLinearLayout"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/SearchLayout"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/itemListView"
+                tools:fastScrollEnabled="false"
+                android:entries="@array/testItemList"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/addItemToDBLinearLayout"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/itemListViewLinearLayout"
+            android:layout_alignParentStart="true"
+            android:layout_weight="0" >
+
+            <Button
+                android:text="Add New Item to Data Base"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/addToDBButton"
+                android:onClick="onClickAddToDBButton"
+                android:layout_weight="1" />
+
+            <Button
+                android:text="Display All"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/displayAllItemsDBButton"
+                android:onClick="onClickDisplayAllButton"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

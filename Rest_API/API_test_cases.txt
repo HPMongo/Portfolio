@@ -1,0 +1,64 @@
+//URL to view all songs
+http://ec2-52-39-193-144.us-west-2.compute.amazonaws.com:3000/Artists
+
+//URL to view all songs by an artist
+http://ec2-52-39-193-144.us-west-2.compute.amazonaws.com:3000/Artists/{artist name}
+
+//URL to view detail of a song
+http://ec2-52-39-193-144.us-west-2.compute.amazonaws.com:3000/Artists/{artist name}/{song name}
+
+//URL to view all reviews
+http://ec2-52-39-193-144.us-west-2.compute.amazonaws.com:3000/Reviews
+
+
+//Test case 1 - Add Song
+curl -H "Content-Type: application/json" -X POST -d '{"song":"xyz","artist":"New Artist"}' http://ec2-52-39-193-144.us-west-2.compute.amazonaws.com:3000/addSong
+
+//Test case 2 - Add The Same Song
+curl -H "Content-Type: application/json" -X POST -d '{"song":"xyz","artist":"New Artist"}' http://ec2-52-39-193-144.us-west-2.compute.amazonaws.com:3000/addSong
+
+//Test case 3 - Add Review to the Song
+curl -H "Content-Type: application/json" -X POST -d '{"user":"user1","song":"xyz","artist":"New Artist", "rating":3, "reviewDetail":"Okay song."}' http://localhost:3000/addReview
+
+//Test case 4 - Update Review on the song
+curl -H "Content-Type: application/json" -X PUT -d '{"user":"user1", "song":"xyz","artist":"New Artist", "rating": 3, "reviewDetail":"Change my mind - best song evar!"}' http://ec2-52-39-193-144.us-west-2.compute.amazonaws.com:3000/updateReview
+
+//Test case 5 - Add Another Song to the database
+curl -H "Content-Type: application/json" -X POST -d '{"song":"Red Solo Cup","artist":"Toby Keith"}' http://ec2-52-39-193-144.us-west-2.compute.amazonaws.com:3000/addSong 
+
+//Test case 6 - Add another review to the same song as #3
+curl -H "Content-Type: application/json" -X POST -d '{"user":"user2", "song":"xyz","artist":"New Artist", "rating": 5, "reviewDetail":"This song changes my life!"}' http://ec2-52-39-193-144.us-west-2.compute.amazonaws.com:3000/addReview
+
+//Test case 7 - remove review from #6
+curl -H "Content-Type: application/json" -X DELETE -d '{"user":"user2", "song":"xyz","artist":"New Artist"}' http://ec2-52-39-193-144.us-west-2.compute.amazonaws.com:3000/deleteReview
+
+//Test case 8 - request an artist that does not exist in the database
+http://ec2-52-39-193-144.us-west-2.compute.amazonaws.com:3000/Artists/NonExist
+
+//Test case 9 - request a song that does not exist in the database
+http://ec2-52-39-193-144.us-west-2.compute.amazonaws.com:3000/Artists/Toby%20Keith/No%20Song
+
+//Test case 10 - add request with incorrect verb (PUT)
+curl -H "Content-Type: application/json" -X PUT -d '{"song":"All That She Wants","artist":"Ace of Base"}' http://ec2-52-39-193-144.us-west-2.compute.amazonaws.com:3000/addSong    
+
+//Test case 11 - update request with incorrect verb (POST)
+curl -H "Content-Type: application/json" -X POST -d '{"user":"user1", "song":"xyz","artist":"New Artist", "reviewDetail":"Attemp to update with POST"}' http://ec2-52-39-193-144.us-west-2.compute.amazonaws.com:3000/updateReview
+
+//Test case 12 - delete an non-existing review
+curl -H "Content-Type: application/json" -X DELETE -d '{"user":"user2", "song":"xyz","artist":"New Artist"}' http://ec2-52-39-193-144.us-west-2.compute.amazonaws.com:3000/deleteReview  
+
+////account info
+//Test case 13 - check a non-existing account
+curl -H "Content-Type: application/json" -X POST -d '{"user":"user100","userPW":"abc"}' http://ec2-52-39-193-144.us-west-2.compute.amazonaws.com:3000/validateAccount
+
+//Test case 14 - add a new account
+curl -H "Content-Type: application/json" -X POST -d '{"user":"user1","userPW":"abc"}' http://ec2-52-39-193-144.us-west-2.compute.amazonaws.com:3000/addAccount
+
+//Test case 15 - validate an existing account
+curl -H "Content-Type: application/json" -X POST -d '{"user":"user1","userPW":"abc"}' http://ec2-52-39-193-144.us-west-2.compute.amazonaws.com:3000/validateAccount
+
+//Test case 16 - validate an existing account with invalid password
+curl -H "Content-Type: application/json" -X POST -d '{"user":"user1","userPW":"123"}' http://ec2-52-39-193-144.us-west-2.compute.amazonaws.com:3000/validateAccount
+
+
+

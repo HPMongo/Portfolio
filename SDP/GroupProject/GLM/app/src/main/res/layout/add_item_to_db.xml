@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:text="Item Type:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/itemInType" />
+
+    <TextView
+        android:text="Item Name:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/itemInName" />
+
+    <TextView
+        android:text="Item Unit:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView3" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/itemInUnit" />
+
+    <Button
+        android:text="Add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button"
+        android:onClick="handleAdd"/>
+
+    <Button
+        android:text="Query Database"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button2"
+        android:onClick="handleQuery" />
+
+    <TextView
+        android:text="Search for:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView4" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/searchItemName" />
+
+    <Button
+        android:text="Search Item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button4"
+        android:onClick="handleSearch" />
+
+    <Button
+        android:text="Retrieve List"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button5"
+        android:onClick="handleRetrieveList" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/queryDisplay" />
+</LinearLayout>

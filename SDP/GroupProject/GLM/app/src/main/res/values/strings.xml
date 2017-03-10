@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Grocery List Manager</string>
+
+    <string-array name="testItemList">
+        <item>dummyitem1</item>
+        <item>dummyitem2</item>
+        <item>dummyitem3</item>
+    </string-array>
+</resources>

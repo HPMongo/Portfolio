@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add New Review</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="scripts.js"></script>
+</head>
+<body>
+<div class="container">
+    <h4>Review</h4>
+    <form action="landing.html">
+        <input type="submit" value="Go back">
+    </form>
+</div>
+<script>
+    $( document ).ready(function() {
+        // Check if user is valid
+        var inUser = readCookie('apiuser');
+        if (inUser) {
+            // Set up url:
+            var url = 'http://ec2-52-39-193-144.us-west-2.compute.amazonaws.com:3000/Artists';
+            // Send the data using post
+            var get = $.get(url);
+
+            // Put the results in a div
+            get.done(function( data ) {
+                var status = data.status;
+                var message = data.message;
+                if(status === 200) {
+                    if(data.results.Count > 0) {
+                        var i, msg;
+                        msg =  '<p>Please select a song to review:</p>';
+                        msg += '<form action="/" id="selectForm">';
+                        for(i = 0; i < data.results.Count; i++) {
+                            msg += '<div class="radio"><label><input type="radio" name="songradio" value="';
+                            msg += data.results.Items[i].SongTitle;
+                            msg += '#.#';
+                            msg += data.results.Items[i].Artist;
+                            msg += '">';
+                            msg += data.results.Items[i].SongTitle;
+                            msg += ' by ';
+                            msg += data.results.Items[i].Artist;
+                            msg += '</label></div>';
+                        }
+                        //msg += '<input type="submit" value="View Detail"> </form>';
+                        msg+= '<button type="button" name="getVal" onclick="setNewSong()">Add review</button>';
+                        $("#result").empty().append(msg);
+                    }
+                } else {
+                    $( "#result" ).empty().append('It looks there is no song to review at the moment.');
+                }
+            });
+        } else {
+            var nextpage = "index.html";
+            $(location).attr('href',nextpage);
+        }
+    });
+</script>
+<div class="container">
+                <pre id="result">
+                    <!-- To be populated dynamically. -->
+                </pre>
+</div>
+</body>
+</html>

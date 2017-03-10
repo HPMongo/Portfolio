@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Crawler</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon.ico">
+    <link rel="stylesheet" href="css/shape.css">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12"><img src="img/logo_v2.png" class="logo img-responsive"></div>
+      </div>
+      <section id="model" class="col-md-12"></section>
+    </div>
+    <footer>
+      <div id="menu-bar">
+        <div class="row">
+          <div class="col-md-12">
+            <h3 class="text-center"><a role="button" data-toggle="collapse" data-target="#upper" aria-expanded="false" aria-controls="upper"><span class="glyphicon glyphicon-cog"></span>Config </a>
+              <button id="stop-btn" class="btn btn-danger btn-xs hidden"><span aria-hidden="true" class="glyphicon glyphicon-remove-circle"> </span>Stop</button>
+            </h3>
+          </div>
+        </div>
+        <section id="upper" class="clearfix collapse in">
+          <section class="col-sm-8">
+            <h4>Session Parameters</h4>
+            <form id="crawler-input" action="crawl" method="POST" class="form-horizontal">
+              <div id="form-group-url" class="form-group">
+                <label for="input-url" class="col-sm-2 control-label">Starting URL</label>
+                <div class="col-sm-10">
+                  <input id="input-url" name="url" type="url" placeholder="http://www.example.com/page/" class="form-control">
+                </div>
+              </div>
+              <div id="form-group-type" class="form-group">
+                <label class="col-sm-2 control-label">Search Type</label>
+                <div class="col-sm-10">
+                  <label class="radio-inline">
+                    <input name="type" type="radio" value="dfs" checked>Depth-first
+                  </label>
+                  <label class="radio-inline">
+                    <input name="type" type="radio" value="bfs">Breadth-first
+                  </label>
+                </div>
+              </div>
+              <div id="form-group-limit" class="form-group">
+                <label for="input-limit" class="col-sm-2 control-label">Limit</label>
+                <div class="col-sm-10">
+                  <input id="input-limit" name="limit" type="number" min="1" max="99" value="1" class="form-control">
+                </div>
+              </div>
+              <div id="form-group-keyword" class="form-group">
+                <label for="input-keyword" class="col-sm-2 control-label">Keyword</label>
+                <div class="col-sm-10">
+                  <input id="input-keyword" name="keyword" type="text" class="form-control">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2"></label>
+                <div class="col-sm-10">
+                  <button name="submit" type="submit" class="btn btn-primary">Start</button>
+                  <button type="reset" class="btn btn-default pull-right">Reset</button>
+                </div>
+              </div>
+            </form>
+          </section>
+          <div class="clearfix visible-xs-block"></div>
+          <section id="previous-queries" class="col-sm-4">
+            <h4>Previous Crawls</h4>
+            <ul class="list-unstyled previous-queries"></ul>
+          </section>
+        </section>
+      </div>
+    </footer>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+    <script src="js/raphael.min.js"></script>
+    <script src="js/springy.min.js"></script>
+    <script src="js/graph.js"></script>
+    <script src="js/localStore.js"></script>
+    <script src="js/index.js"></script>
+  </body>
+</html>

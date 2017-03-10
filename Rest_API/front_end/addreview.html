@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add New Review</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="scripts.js"></script>
+</head>
+<body>
+<div class="container">
+    <h4>Review</h4>
+    <form action="selectsong.html">
+        <input type="submit" value="Go back">
+    </form>
+    <form action="landing.html">
+        <input type="submit" value="Cancel">
+    </form>
+    <form action="/" id="reviewForm">
+        <input type="submit" value="Add review">
+    </form>
+</div>
+<script>
+    // Attach a submit handler to the form
+    $( "#reviewForm" ).submit(function( event ) {
+
+        // Stop form from submitting normally
+        event.preventDefault();
+        // Get update info
+        var inUser = readCookie('apiuser');
+        var inSong = document.getElementById('song').value;
+        var inArtist = document.getElementById('artist').value;
+        var inRating = document.getElementById('rating').value;
+        var inReview = document.getElementById('review').value;
+
+        // create url
+        var url = 'http://ec2-52-39-193-144.us-west-2.compute.amazonaws.com:3000/addReview';
+        // Send the data using put
+        var post = $.post( url, { user: inUser , song: inSong, artist: inArtist, rating: inRating, reviewDetail: inReview} );
+
+        // Put the results in a div
+        post.done(function( data ) {
+            var status = data.status;
+            var message = data.message;
+            $( "#result2" ).empty().append( message );
+        });
+    });
+</script>
+<script>
+    $( document ).ready(function() {
+        // Check if user is valid
+        var inUser = readCookie('apiuser');
+        if (inUser) {
+            var valueStr = readCookie('apinewsong');
+            if(valueStr) {
+                var delimiter = '#.#';
+                var arrayOfStrings = valueStr.split(delimiter);
+                var inSong = arrayOfStrings[0];
+                var inArtist = arrayOfStrings[1];
+                var msg;
+                msg =  '<p>Please add your review:</p>';
+                msg += '<form id="displayForm">';
+                msg += 'Song: <input type="text" id="song" name="song" value="';
+                msg += inSong;
+                msg += '" readonly="readonly"><br>';
+                msg += 'Artist: <input type="text" id="artist" name="aritst" value="';
+                msg += inArtist;
+                msg += '" readonly="readonly"><br>';
+                msg += 'My rating: <input type="number" id="rating" name="rating" min="1" max="5"><br>';
+                msg += 'Review: <input type="text" id="review" rows="3" name="review"><br></form>';
+
+                $("#result").empty().append(msg);
+            } else { // invalid song selection redirect to selection page
+                var nextpage = "selectsong.html";
+                $(location).attr('href',nextpage);
+            }
+        } else {    // invalid user redirect to front page
+            var nextpage = "index.html";
+            $(location).attr('href',nextpage);
+        }
+    });
+</script>
+    <div class="container">
+                <pre id="result">
+                    <!-- To be populated dynamically. -->
+                </pre>
+    </div>
+<div class="container">
+                <pre id="result2">
+                    <!-- To be populated dynamically. -->
+                </pre>
+</div>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Review Detail</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="scripts.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h4>Review</h4>
+        <form action="/" id="logoutForm">
+            <input type="submit" value="Log out">
+        </form>
+        <form action="landing.html">
+            <input type="submit" value="Go back">
+        </form>
+        <form action="/" id="updateForm">
+            <input type="submit" value="Update">
+        </form>
+        <form action="/" id="deleteForm">
+            <input type="submit" value="Delete">
+        </form>
+    </div>
+    <script>
+        // Attach a submit handler to the form
+        $( "#logoutForm" ).submit(function( event ) {
+
+            // Stop form from submitting normally
+            event.preventDefault();
+
+            // Delete cookies
+            eraseCookie('apiuser');
+            eraseCookie('apisong');
+            eraseCookie('apinewsong');
+            // Redirect to front page
+            var nextpage = "index.html";
+            $(location).attr('href',nextpage);
+        });
+
+        // Attach a submit handler to the form
+        $( "#updateForm" ).submit(function( event ) {
+
+            // Stop form from submitting normally
+            event.preventDefault();
+            // Get update info
+            var inUser = readCookie('apiuser');
+            var inSong = readCookie('apisong');
+            var inArtist = document.getElementById('artist').value;
+            var inRating = document.getElementById('rating').value;
+            var inReview = document.getElementById('review').value;
+            // Construct put request
+            $.put = function(url, data, callback, type){
+
+                if ( $.isFunction(data) ){
+                    type = type || callback,
+                            callback = data,
+                            data = {}
+                }
+
+                return $.ajax({
+                    url: url,
+                    type: 'PUT',
+                    success: callback,
+                    data: data,
+                    contentType: type
+                });
+            }
+
+            var url = 'http://ec2-52-39-193-144.us-west-2.compute.amazonaws.com:3000/updateReview';
+            // Send the data using put
+            var putting = $.put( url, { user: inUser , song: inSong, artist: inArtist, rating: inRating, reviewDetail: inReview} );
+
+            // Put the results in a div
+            putting.done(function( data ) {
+                var status = data.status;
+                var message = data.message;
+                $( "#result2" ).empty().append( message );
+            });
+        });
+
+        // Attach a submit handler to the form
+        $( "#deleteForm" ).submit(function( event ) {
+
+            // Stop form from submitting normally
+            event.preventDefault();
+            // Get value
+            var inUser = readCookie('apiuser');
+            var inSong = readCookie('apisong');
+            var inArtist = document.getElementById('artist').value;
+            // Construct delete request
+            $.delete = function(url, data, callback, type){
+
+                if ( $.isFunction(data) ){
+                    type = type || callback,
+                            callback = data,
+                            data = {}
+                }
+
+                return $.ajax({
+                    url: url,
+                    type: 'DELETE',
+                    success: callback,
+                    data: data,
+                    contentType: type
+                });
+            }
+
+            var url = 'http://ec2-52-39-193-144.us-west-2.compute.amazonaws.com:3000/deleteReview';
+            // Send the data using put
+            var deleting = $.delete( url, { user: inUser , song: inSong, artist: inArtist} );
+
+            // Put the results in a div
+            deleting.done(function( data ) {
+                var status = data.status;
+                var message = data.message;
+                $( "#result2" ).empty().append( message );
+            });
+        });
+    </script>
+    <script>
+        $( document ).ready(function() {
+            // Check if user is valid
+            var inUser = readCookie('apiuser');
+            var inSong = readCookie('apisong');
+            if (inUser && inSong) {
+                // Set up url:
+                var url = 'http://ec2-52-39-193-144.us-west-2.compute.amazonaws.com:3000/Users' + '/' + inUser + '/' + inSong;
+                // Send the data using post
+                var get = $.get(url);
+
+                // Put the results in a div
+                get.done(function( data ) {
+                    var status = data.status;
+                    var message = data.message;
+                    if(status === 200) {
+                        var msg;
+                        msg =  '<p>Here is your review:</p>';
+                        msg += '<form action="/" id="reviewDetail">';
+                        msg += 'Song: <input type="text" id="song" name="song" value="';
+                        msg += data.results.Item.SongTitle;
+                        msg += '" readonly="readonly"><br>';
+                        msg += 'Artist: <input type="text" id="artist" name="aritst" value="';
+                        msg += data.results.Item.Artist;
+                        msg += '" readonly="readonly"><br>';
+                        msg += 'My rating: <input type="number" id="rating" name="rating" min="1" max="5" value="';
+                        msg += data.results.Item.Rating;
+                        msg += '"><br>';
+                        msg += 'Review: <input type="text" id="review" rows="3" name="review" value="';
+                        msg += data.results.Item.Review;
+                        msg += '"><br></form>';
+
+                        $("#result").empty().append(msg);
+                    } else {
+                        $( "#result" ).empty().append('It looks like something is wrong. Please try back');
+                    }
+                });
+            } else {
+                var nextpage = "index.html";
+                $(location).attr('href',nextpage);
+            }
+        });
+    </script>
+    <div class="container">
+            <pre id="result">
+                <!-- To be populated dynamically. -->
+            </pre>
+    </div>
+    <div class="container">
+            <pre id="result2">
+                <!-- To be populated dynamically. -->
+            </pre>
+    </div>
+</body>
+</html>
